@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**", "/actuator/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults());
 
