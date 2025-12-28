@@ -1,0 +1,8 @@
+**/venv/
+**/node_modules/
+**/target/
+**/.DS_Store
+**/.idea/
+**/.vscode/
+**/users.db
+*.log

@@ -7,7 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'http://localhost:8080/api/login';
+    private apiUrl = '/api/login';
     private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
     constructor(private http: HttpClient) { }
