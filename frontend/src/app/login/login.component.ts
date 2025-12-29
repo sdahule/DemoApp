@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   template: `
     <div class="login-container">
       <h2>Login</h2>
@@ -21,6 +21,9 @@ import { CommonModule } from '@angular/common';
       </div>
       <button (click)="onLogin()">Login</button>
       <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      <div style="margin-top: 15px; text-align: center;">
+         <a routerLink="/register">Register new account</a>
+      </div>
     </div>
   `,
   styles: [`

@@ -27,4 +27,13 @@ public class AuthController {
         }
         return ResponseEntity.status(401).build();
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/register")
+    public ResponseEntity<?> register(@org.springframework.web.bind.annotation.RequestBody User user) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            return ResponseEntity.badRequest().body("Username already exists");
+        }
+        userRepository.save(user);
+        return ResponseEntity.ok("User registered successfully");
+    }
 }

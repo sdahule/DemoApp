@@ -18,7 +18,10 @@ export class AuthService {
         });
 
         return this.http.get(this.apiUrl, { headers }).pipe(
-            tap(() => this.isAuthenticatedSubject.next(true)),
+            tap(() => {
+                this.isAuthenticatedSubject.next(true);
+                localStorage.setItem('authHeader', 'Basic ' + btoa(username + ':' + password));
+            }),
             catchError(error => {
                 this.isAuthenticatedSubject.next(false);
                 throw error;
@@ -26,7 +29,16 @@ export class AuthService {
         );
     }
 
+    register(username: string, password: string): Observable<any> {
+        return this.http.post('/api/register', { username, password });
+    }
+
     isAuthenticated(): boolean {
         return this.isAuthenticatedSubject.value;
+    }
+
+    logout() {
+        localStorage.removeItem('authHeader');
+        this.isAuthenticatedSubject.next(false);
     }
 }
