@@ -1,0 +1,95 @@
+<div class="portfolio-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="name">{{ portfolioData.name }}</h1>
+      <h2 class="title">{{ portfolioData.title }}</h2>
+      <div class="contact-info">
+        <span><i class="material-icons">location_on</i> {{ portfolioData.location }}</span>
+        <span><i class="material-icons">phone</i> {{ portfolioData.phone }}</span>
+        <span><i class="material-icons">email</i> <a href="mailto:{{ portfolioData.email }}">{{ portfolioData.email }}</a></span>
+        <span><i class="material-icons">link</i> <a href="https://{{ portfolioData.linkedin }}" target="_blank">LinkedIn</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional Summary -->
+  <section class="summary-section">
+    <h3>Professional Summary</h3>
+    <p>{{ portfolioData.summary }}</p>
+  </section>
+
+  <!-- Skills Matrix -->
+  <section class="skills-section">
+    <h3>Skills Matrix</h3>
+    <div class="skills-grid">
+      @for (category of portfolioData.skills; track category.category) {
+        <mat-card class="skill-card">
+          <mat-card-header>
+            <mat-card-title>{{ category.category }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-chip-set>
+              @for (skill of category.items; track skill) {
+                <mat-chip>{{ skill }}</mat-chip>
+              }
+            </mat-chip-set>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- Professional Experience -->
+  <section class="experience-section">
+    <h3>Professional Experience</h3>
+    <div class="experience-timeline">
+      @for (exp of portfolioData.experience; track exp.company) {
+        <mat-card class="exp-card">
+          <mat-card-header>
+            <div class="exp-header-content">
+              <mat-card-title>{{ exp.role }}</mat-card-title>
+              <mat-card-subtitle>{{ exp.company }} | {{ exp.duration }}</mat-card-subtitle>
+              @if (exp.progression) {
+                <p class="progression"><em>{{ exp.progression }}</em></p>
+              }
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <ul>
+              @for (achievement of exp.achievements; track achievement) {
+                <li>{{ achievement }}</li>
+              }
+            </ul>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- Education & Leadership -->
+  <section class="bottom-section">
+    <div class="education">
+      <h3>Education</h3>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ portfolioData.education.degree }}</mat-card-title>
+          <mat-card-subtitle>{{ portfolioData.education.university }} | {{ portfolioData.education.duration }}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+
+    <div class="leadership">
+      <h3>Leadership & Process Excellence</h3>
+      <mat-card>
+        <mat-card-content>
+          <ul>
+            @for (item of portfolioData.leadership; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+</div>
